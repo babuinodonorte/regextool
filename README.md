@@ -3,43 +3,43 @@
 ```
 ╔══════════════════════════════════════╗
 ║       REGEX TOOL — Linux GUI         ║
-║  Tester · Referência · Busca         ║
+║  Tester · Reference · File Search    ║
 ╚══════════════════════════════════════╝
 ```
 
-Ferramenta desktop para Linux com interface gráfica (tkinter).  
-Teste expressões regulares em tempo real, consulte referência interativa e busque arquivos no sistema usando regex.
+A desktop GUI tool for Linux built with Python and tkinter.  
+Test regular expressions in real time, browse an interactive reference cheatsheet, and search files on your system using regex patterns.
 
 ---
 
-## Índice
+## Table of Contents
 
-- [Como funciona](#como-funciona)
-- [Instalação](#instalação)
-- [Abas e funcionalidades](#abas-e-funcionalidades)
-- [Referência rápida de regex](#referência-rápida-de-regex)
-- [Requisitos](#requisitos)
-- [Desinstalação](#desinstalação)
-
----
-
-## Como funciona
-
-O **Regex Tool** tem três abas integradas:
-
-| Aba | O que faz |
-|-----|-----------|
-| 🔬 Tester | Digita o padrão e o texto — matches são destacados em tempo real com grupos capturados |
-| 📖 Referência | Cheatsheet completa de metacaracteres, quantificadores, âncoras e grupos. Clique em qualquer item para carregar no Tester |
-| 🗂 Busca no sistema | Filtra arquivos por nome (regex) e/ou conteúdo interno, recursivamente |
-
-Tudo roda localmente. Nenhum dado sai da máquina.
+- [How it works](#how-it-works)
+- [Installation](#installation)
+- [Tabs and features](#tabs-and-features)
+- [Regex quick reference](#regex-quick-reference)
+- [Requirements](#requirements)
+- [Uninstallation](#uninstallation)
 
 ---
 
-## Instalação
+## How it works
 
-**Via script (recomendado):**
+**Regex Tool** has three integrated tabs:
+
+| Tab | What it does |
+|-----|-------------|
+| 🔬 Tester | Type a pattern and test text — matches are highlighted in real time with captured groups shown |
+| 📖 Reference | Full cheatsheet of metacharacters, quantifiers, anchors, and groups. Click any item to load it into the Tester |
+| 🗂 File Search | Filter files by name (regex) and/or file content, recursively across directories |
+
+Everything runs locally. No data leaves your machine.
+
+---
+
+## Installation
+
+**Via script (recommended):**
 
 ```bash
 git clone https://github.com/BabuinoDoNorte/RegexTool.git
@@ -48,7 +48,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-> Após instalar, o comando `regextool` fica disponível globalmente.
+> After install, the `regextool` command is available system-wide.
 
 **One-liner:**
 
@@ -58,70 +58,70 @@ curl -fsSL https://raw.githubusercontent.com/BabuinoDoNorte/RegexTool/main/insta
 
 ---
 
-## Abas e funcionalidades
+## Tabs and features
 
 ### 🔬 Tester
 
-- Campo de regex com feedback visual de erro imediato
-- Flags toggleáveis: `i` (ignore case), `m` (multiline), `s` (dotall)
-- Matches destacados em dois tons alternados no texto
-- Tabela com: número do match, texto, posição início/fim, grupos capturados
+- Regex input field with immediate visual error feedback
+- Toggleable flags: `i` (ignore case), `m` (multiline), `s` (dotall)
+- Matches highlighted in two alternating colors in the test text
+- Table showing: match number, matched text, start/end position, captured groups
 
-### 📖 Referência
+### 📖 Reference
 
-- Seções: Caracteres especiais · Quantificadores · Âncoras · Classes · Grupos · Escape
-- Cada item mostra símbolo, descrição e exemplo de uso
-- **Clique em qualquer linha** → carrega o padrão direto no Tester
+- Sections: Special characters · Quantifiers · Anchors · Character classes · Groups · Escape
+- Each entry shows the symbol, description, and usage example
+- **Click any row** → loads the pattern directly into the Tester
 
-### 🗂 Busca no sistema
+### 🗂 File Search
 
-- Escolha o diretório (botão `…` ou digitando o caminho)
-- **Padrão de nome**: filtra arquivos pelo nome usando regex (ex: `[Ff]ile\d+`)
-- **Dentro do arquivo**: busca o padrão dentro do conteúdo dos arquivos de texto
-- Opções: recursivo · incluir ocultos · case-insensitive
-- Busca roda em thread separada — UI não trava
-- Duplo-clique no resultado abre o gerenciador de arquivos no diretório
+- Choose directory via `…` button or by typing the path
+- **Name pattern**: filter files by filename using regex (e.g. `[Ff]ile\d+`)
+- **Content pattern**: search for a regex pattern inside file contents
+- Options: recursive · include hidden files · case-insensitive
+- Search runs in a separate thread — UI stays responsive
+- Double-click a result to open its location in the file manager
 
 ---
 
-## Referência rápida de regex
+## Regex quick reference
 
-| Padrão | Significado | Exemplo |
-|--------|-------------|---------|
-| `.` | Qualquer caractere (exceto `\n`) | `a.c` → `abc`, `a1c` |
-| `\d` | Dígito [0-9] | `\d{3}` → `123` |
-| `\w` | Alfanumérico + `_` | `\w+` → `hello_world` |
+| Pattern | Meaning | Example |
+|---------|---------|---------|
+| `.` | Any character (except `\n`) | `a.c` → `abc`, `a1c` |
+| `\d` | Digit [0-9] | `\d{3}` → `123` |
+| `\w` | Alphanumeric + `_` | `\w+` → `hello_world` |
 | `\s` | Whitespace | `kali\s+tools` |
-| `*` | 0 ou mais | `cats*` → `cat`, `catsss` |
-| `+` | 1 ou mais | `br+` → `br`, `brrrrr` |
-| `?` | Opcional (0 ou 1) | `colou?r` → `color`, `colour` |
-| `{n,m}` | Entre n e m vezes | `\d{2,4}` → `12`, `1234` |
-| `^` | Início da linha | `^user:` |
-| `$` | Fim da linha | `EOF$` |
-| `[abc]` | a, b ou c | `[cfh]at` → `cat`, `fat` |
-| `[^abc]` | Negação | `[^0-9]` → não-dígito |
-| `(a\|b)` | a ou b | `nano\|vim` |
-| `(\w+)` | Grupo de captura | `(\w+)@(\w+)\.com` |
+| `*` | 0 or more | `cats*` → `cat`, `catsss` |
+| `+` | 1 or more | `br+` → `br`, `brrrrr` |
+| `?` | Optional (0 or 1) | `colou?r` → `color`, `colour` |
+| `{n,m}` | Between n and m times | `\d{2,4}` → `12`, `1234` |
+| `^` | Start of line | `^username:` |
+| `$` | End of line | `EOF$` |
+| `[abc]` | a, b, or c | `[cfh]at` → `cat`, `fat` |
+| `[^abc]` | Negation | `[^0-9]` → non-digit |
+| `(a\|b)` | a or b | `nano\|vim` |
+| `(\w+)` | Capture group | `(\w+)@(\w+)\.com` |
 
 ---
 
-## Requisitos
+## Requirements
 
-- Ubuntu 20.04+ (ou qualquer distro com Python 3.8+)
+- Ubuntu 20.04+ (or any distro with Python 3.8+)
 - Python 3.8+
-- `python3-tk` (instalado automaticamente pelo `install.sh` se ausente)
+- `python3-tk` (installed automatically by `install.sh` if missing)
 
-Sem dependências externas — apenas biblioteca padrão do Python.
+No external dependencies — Python standard library only.
 
 ---
 
-## Desinstalação
+## Uninstallation
 
 ```bash
 ./uninstall.sh
 ```
 
-Ou manualmente:
+Or manually:
 
 ```bash
 sudo rm /usr/local/bin/regextool
@@ -129,6 +129,6 @@ sudo rm /usr/local/bin/regextool
 
 ---
 
-## Licença
+## License
 
-MIT — livre para usar, modificar e distribuir.
+MIT — free to use, modify, and distribute.
